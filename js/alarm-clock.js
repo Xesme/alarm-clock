@@ -3,7 +3,7 @@ Alarm = function() {
 }
 
 Alarm.prototype.setTime = function(alarmTime) {
-  this.alarm = new Date(alarmTime)
+  this.alarm = alarmTime;
 }
 
 Alarm.prototype.getTime = function() {
@@ -11,7 +11,8 @@ Alarm.prototype.getTime = function() {
 }
 
 Alarm.prototype.activateAlarm = function(currentTime) {
-  if (this.getTime() === currentTime) {
+
+  if (this.getTime() == currentTime.format("HH:mm")) {
     return true;
   } else {
     return false;

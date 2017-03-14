@@ -4,7 +4,7 @@ Alarm = function() {
 }
 
 Alarm.prototype.setTime = function(alarmTime) {
-  this.alarm = new Date(alarmTime)
+  this.alarm = alarmTime;
 }
 
 Alarm.prototype.getTime = function() {
@@ -12,7 +12,8 @@ Alarm.prototype.getTime = function() {
 }
 
 Alarm.prototype.activateAlarm = function(currentTime) {
-  if (this.getTime() === currentTime) {
+
+  if (this.getTime() == currentTime.format("HH:mm")) {
     return true;
   } else {
     return false;
@@ -26,18 +27,21 @@ var Alarm = require('./../js/alarm-clock.js').alarmModule;
 
 $(document).ready(function(){
   setInterval(function(){$('#time').text(moment());}, 1000);
-  var setClock = "";
-  var alarmTime = new Alarm();
+  var alarmTime = "";
+  var alarm = new Alarm();
 
   $('.alarm-form').submit(function(event){
     event.preventDefault();
-    setClock = $('#alarm').val();
-    alarmTime.setTime(setClock);
-    $('#alarm-set').text(alarmTime.getTime());
+    alarmTime = $('#alarm-time').val();
+    alarm.setTime(alarmTime);
+    $('#alarm-set').text("Alarm set for: " + alarm.getTime());
   });
 
-  setInterval(function() {console.log(alarmTime.activateAlarm(new Date(moment())));}, 1000);
-
+  setInterval(function(){
+    if (alarm.activateAlarm(moment())) {
+      $('#alarm-set').text("Wake up!");
+    };
+  }, 1000);
 });
 
 },{"./../js/alarm-clock.js":1}]},{},[2]);
