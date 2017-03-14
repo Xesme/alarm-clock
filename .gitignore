@@ -2,4 +2,4 @@ vendor/
 node_modules/
 bower_components/
 .env
-DC_Store
+DC_Stores
