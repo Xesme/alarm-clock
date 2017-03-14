@@ -1,6 +1,21 @@
-function alarm(dateTime) {
-  var alarmTime = new Date(dateTime);
-  return alarmTime;
+Alarm = function() {
+  this.alarm = "";
 }
 
-exports.alarmModule = alarm;
+Alarm.prototype.setTime = function(alarmTime) {
+  this.alarm = new Date(alarmTime)
+}
+
+Alarm.prototype.getTime = function() {
+  return this.alarm;
+}
+
+Alarm.prototype.activateAlarm = function(currentTime) {
+  if (this.getTime() === currentTime) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+exports.alarmModule = Alarm;
